@@ -12,12 +12,11 @@ const router = express.Router();
 
 /* ===== STORAGE ===== */
 const storage = multer.diskStorage({
-  destination: "/tmp",
+  destination: "uploads",
   filename: (_, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
-
 
 /* ===== VIDEO ONLY FILTER ===== */
 const fileFilter = (req, file, cb) => {
