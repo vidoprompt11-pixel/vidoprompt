@@ -10,15 +10,30 @@ import {
 
 const router = express.Router();
 
-/* ===== STORAGE ===== */
+/* =========================
+   STORAGE (LOCAL + VERCEL)
+========================= */
+
+// Vercel par disk read-only hoy che
+// Vercel only /tmp allow kare che
+const isVercel = process.env.VERCEL === "1";
+
 const storage = multer.diskStorage({
-  destination: "uploads",
-  filename: (_, file, cb) => {
+  destination: (req, file, cb) => {
+    if (isVercel) {
+      cb(null, "/tmp");      // ✅ Vercel safe
+    } else {
+      cb(null, "uploads");  // ✅ Local dev
+    }
+  },
+  filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
 
-/* ===== VIDEO ONLY FILTER ===== */
+/* =========================
+   VIDEO FILE FILTER
+========================= */
 const fileFilter = (req, file, cb) => {
   const allowedTypes = [
     "video/mp4",
@@ -39,13 +54,15 @@ const upload = multer({
   storage,
   fileFilter,
   limits: {
-    fileSize: 200 * 1024 * 1024,
+    fileSize: 200 * 1024 * 1024, // 200MB
   },
 });
 
-/* ===== ROUTES ===== */
+/* =========================
+   ROUTES
+========================= */
 
-// upload (admin/dashboard)
+// Upload video (admin/dashboard)
 router.post(
   "/dashboard-upload",
   auth,
@@ -53,13 +70,13 @@ router.post(
   uploadVideo
 );
 
-// fetch videos (frontend list)
+// Fetch all videos (frontend list)
 router.get("/", getVideos);
 
-// increment view
+// Increment views
 router.post("/:id/view", incrementView);
 
-// 🔥 GET SINGLE VIDEO (DETAIL PAGE)
+// Get single video by ID
 router.get("/:id", getVideoById);
 
 export default router;
