@@ -1,0 +1,122 @@
+.terms-page {
+    padding: 120px 35px 120px;
+    color: #e5e7eb;
+}
+
+/* HERO */
+.terms-hero {
+    max-width: 900px;
+    margin-bottom: 80px;
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.terms-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgb(112 99 243 / 18%);
+    color: #e5e7eb;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    margin-bottom: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.terms-hero h1 {
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.terms-hero h1 span {
+    color: #7562f3;
+}
+
+.terms-hero p {
+    font-size: 18px;
+    max-width: 700px;
+    color: #cbd5f5;
+}
+
+.terms-hero small {
+    display: block;
+    margin-top: 14px;
+    opacity: 0.6;
+}
+
+/* GRID */
+.terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 28px;
+}
+
+/* CARD */
+.terms-card {
+    background: linear-gradient(180deg,
+            rgba(15, 23, 42, 0.9),
+            rgba(2, 6, 23, 0.9));
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 22px;
+    padding: 26px;
+    backdrop-filter: blur(12px);
+    animation: cardUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.terms-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.terms-card p,
+.terms-card li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #cbd5f5;
+}
+
+.terms-card ul {
+    padding-left: 18px;
+}
+
+.terms-card li {
+    margin-bottom: 8px;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .terms-hero h1 {
+        font-size: 34px;
+    }
+
+    .terms-page {
+        padding-top: 65px;
+        padding-bottom: 65px;
+    }
+}

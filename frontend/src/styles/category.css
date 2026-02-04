@@ -1,0 +1,16 @@
+.sub-bar {
+  text-align: center;
+}
+
+.sub-bar button {
+  margin: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.sub-bar .active {
+  background: #7c7cff;
+  color: white;
+}
