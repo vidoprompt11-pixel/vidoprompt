@@ -5,6 +5,11 @@ import videoRoutes from "./routes/video.routes.js";
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.send("Vidoprompt Backend is running 🚀");
+});
+
+
 app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
