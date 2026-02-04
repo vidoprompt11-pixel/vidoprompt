@@ -36,7 +36,7 @@ export default function Header({ platform, setPlatform }) {
             onClick={() => navigate("/")}
           >
             <span className="dot" />
-            BANANA PROMPTS
+            BANANA PROMPT
           </div>
 
           {/* DESKTOP NAV */}
