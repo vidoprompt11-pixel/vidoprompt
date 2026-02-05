@@ -72,7 +72,7 @@
   cursor: pointer;
   padding: 6px 14px;
   border-radius: 999px;
-  transition: all .25s ease;
+  /* transition: all .25s ease; */
 }
 
 .nav-btn:hover {
@@ -91,7 +91,7 @@
   font-weight: 600;
   cursor: pointer;
   margin-right: 4px;
-  transition: transform .2s ease, box-shadow .2s ease;
+  /* transition: transform .2s ease, box-shadow .2s ease; */
 }
 
 /* ===== ACTIONS ===== */
