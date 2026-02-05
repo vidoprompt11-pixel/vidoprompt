@@ -116,6 +116,8 @@ export default function VideoDetail() {
 
         {toast && <div className="toast">{toast}</div>}
       </div>
+
+      <Footer />
     </div>
   );
 }
