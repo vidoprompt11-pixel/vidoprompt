@@ -17,14 +17,13 @@ export default function Header({ platform, setPlatform }) {
   const handlePlatformClick = (p) => {
     setMobileOpen(false);
 
-    // Always go to home
-    navigate("/");
+    navigate(`/?platform=${p}`);
 
-    // If platform state exists (home page)
     if (typeof setPlatform === "function") {
       setPlatform(p);
     }
   };
+
 
   return (
     <>
@@ -33,8 +32,9 @@ export default function Header({ platform, setPlatform }) {
           {/* LOGO */}
           <div
             className="logo"
-            onClick={() => navigate("/")}
+            onClick={() => setPlatform("instagram")}
           >
+
             <span className="dot" />
             BANANA PROMPT
           </div>

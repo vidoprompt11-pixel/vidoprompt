@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import axios from "../api/axios";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
@@ -9,11 +10,29 @@ import "../styles/home.css";
 import Footer from "../components/Footer";
 
 const Home = () => {
-  const [platform, setPlatform] = useState("instagram");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [platform, setPlatform] = useState(
+    searchParams.get("platform") || "instagram"
+  );
   const [subCategory, setSubCategory] = useState("");
   const [search, setSearch] = useState("");
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Sync platform from URL → state
+  useEffect(() => {
+    const p = searchParams.get("platform");
+    if (p && p !== platform) {
+      setPlatform(p);
+    }
+  }, [searchParams]);
+
+  const changePlatform = (p) => {
+    setPlatform(p);
+    setSearchParams({ platform: p });
+  };
+
+
 
   useEffect(() => {
     fetchVideos();
@@ -41,7 +60,8 @@ const Home = () => {
 
   return (
     <>
-      <Header platform={platform} setPlatform={setPlatform} />
+      <Header platform={platform} setPlatform={changePlatform} />
+
 
 
       <div className="search-container">
