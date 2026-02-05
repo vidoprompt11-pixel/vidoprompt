@@ -17,7 +17,7 @@ export default function Header({ platform, setPlatform }) {
   const handlePlatformClick = (p) => {
     setMobileOpen(false);
 
-    navigate(`/?platform=${p}`);
+    navigate(`/${p}`);
 
     if (typeof setPlatform === "function") {
       setPlatform(p);
