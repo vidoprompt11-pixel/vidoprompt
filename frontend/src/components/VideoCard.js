@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/video-card.css";
 
-const BASE_URL = "https://vidoprompt-backend.vercel.app";
+const BASE_URL = "https://vidoprompt-backend.vercel.app/";
 
 export default function VideoCard({ video }) {
   const videoRef = useRef(null);
