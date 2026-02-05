@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 
 import videoRoutes from "./routes/video.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
+import { ensureAdmin } from "./controllers/admin.controller.js";
 
 dotenv.config();
 
@@ -60,6 +61,11 @@ async function connectDB() {
 }
 
 connectDB();
+
+connectDB().then(() => {
+  ensureAdmin();
+});
+
 
 /* ---------- export for Vercel ---------- */
 export default app;
