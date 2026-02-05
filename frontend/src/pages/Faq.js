@@ -90,7 +90,7 @@ const Faq = () => {
             <main className="terms-page container">
                 {/* HERO */}
                 <section className="terms-hero">
-                    <span className="terms-badge">FREQUENTLY ASKED QUESTIONS FREQUENTLY</span>
+                    <span className="terms-badge">FREQUENTLY ASKED QUESTIONS </span>
 
                     <h1>
                         Everything you need to know about Banana Prompts & Nano Banana prompts. <br />
