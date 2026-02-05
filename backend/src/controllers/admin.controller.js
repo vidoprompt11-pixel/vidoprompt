@@ -1,24 +1,13 @@
 import Admin from "../models/Admin.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
-/* ===== AUTO CREATE ADMIN ===== */
-export const ensureAdmin = async () => {
-  const exists = await Admin.findOne({ email: "admin@admin.com" });
-
-  if (!exists) {
-    const hash = await bcrypt.hash("admin123", 10);
-    await Admin.create({
-      email: "admin@admin.com",
-      password: hash,
-    });
-    console.log("✅ Default Admin Created");
-  }
-};
+import connectDB from "../config/db.js";
 
 /* ===== LOGIN ===== */
 export const login = async (req, res) => {
   try {
+    await connectDB(); // 🔥 THIS FIXES VERCEL TIMEOUT
+
     const { email, password } = req.body;
 
     const admin = await Admin.findOne({ email });
@@ -29,10 +18,6 @@ export const login = async (req, res) => {
     const ok = await bcrypt.compare(password, admin.password);
     if (!ok) {
       return res.status(400).json({ msg: "Wrong password" });
-    }
-
-    if (!process.env.JWT_SECRET) {
-      throw new Error("JWT_SECRET missing");
     }
 
     const token = jwt.sign(
