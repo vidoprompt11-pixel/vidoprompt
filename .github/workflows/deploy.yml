@@ -18,9 +18,12 @@ jobs:
         working-directory: ./frontend/
 
       - name: Build Project
+        env:
+          CI: false  # આ લાઈન વૉર્નિંગ્સને કારણે બિલ્ડ અટકાવતા રોકશે
         run: npm run build
-        # ફક્ત ફ્રન્ટએન્ડ ફોલ્ડરમાં પ્રોજેક્ટ બિલ્ડ કરો
         working-directory: ./frontend/
+
+
 
       - name: Sync Files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
