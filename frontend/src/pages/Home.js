@@ -1,39 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import SubCategoryBar from "../components/SubCategoryBar";
 import VideoCard from "../components/VideoCard";
 import Loader from "../components/Loader";
-import "../styles/home.css";
 import Footer from "../components/Footer";
+import "../styles/home.css";
+
+const VALID_PLATFORMS = ["instagram", "youtube", "tiktok"];
 
 const Home = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [platform, setPlatform] = useState(
-    searchParams.get("platform") || "instagram"
-  );
+  const { platform: platformParam } = useParams();
+  const navigate = useNavigate();
+
+  const [platform, setPlatform] = useState("instagram");
   const [subCategory, setSubCategory] = useState("");
   const [search, setSearch] = useState("");
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Sync platform from URL → state
+  // URL → state
   useEffect(() => {
-    const p = searchParams.get("platform");
-    if (p && p !== platform) {
-      setPlatform(p);
+    if (VALID_PLATFORMS.includes(platformParam)) {
+      setPlatform(platformParam);
+    } else {
+      navigate("/instagram", { replace: true });
     }
-  }, [searchParams]);
+  }, [platformParam]);
 
-  const changePlatform = (p) => {
-    setPlatform(p);
-    setSearchParams({ platform: p });
-  };
-
-
-
+  // Fetch videos
   useEffect(() => {
     fetchVideos();
   }, [platform, subCategory, search]);
@@ -42,10 +39,7 @@ const Home = () => {
     try {
       setLoading(true);
 
-      const params = {
-        platform,
-      };
-
+      const params = { platform };
       if (subCategory) params.subCategory = subCategory;
       if (search) params.search = search;
 
@@ -60,15 +54,10 @@ const Home = () => {
 
   return (
     <>
-      <Header platform={platform} setPlatform={changePlatform} />
-
-
+      <Header platform={platform} />
 
       <div className="search-container">
-        <SearchBar
-          value={search}
-          onChange={setSearch}
-        />
+        <SearchBar value={search} onChange={setSearch} />
       </div>
 
       <SubCategoryBar

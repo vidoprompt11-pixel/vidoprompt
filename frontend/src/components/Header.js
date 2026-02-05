@@ -1,42 +1,27 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../styles/header.css";
 
 const PLATFORMS = ["instagram", "youtube", "tiktok"];
 
-export default function Header({ platform, setPlatform }) {
+export default function Header({ platform }) {
   const navigate = useNavigate();
-  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const currentPlatform =
-    platform ||
-    PLATFORMS.find(p => location.pathname.includes(p)) ||
-    "instagram";
 
   const handlePlatformClick = (p) => {
     setMobileOpen(false);
-
     navigate(`/${p}`);
-
-    if (typeof setPlatform === "function") {
-      setPlatform(p);
-    }
   };
-
 
   return (
     <>
       <header className="header container">
         <div className="header-inner">
-          {/* LOGO */}
-          <div
-            className="logo"
-            onClick={() => setPlatform("instagram")}
-          >
 
+          {/* LOGO */}
+          <div className="logo" onClick={() => navigate("/instagram")}>
             <span className="dot" />
-            BANANA PROMPT
+            VIDO PROMPT
           </div>
 
           {/* DESKTOP NAV */}
@@ -44,7 +29,7 @@ export default function Header({ platform, setPlatform }) {
             {PLATFORMS.map(p => (
               <button
                 key={p}
-                className={`nav-btn ${currentPlatform === p ? "active" : ""}`}
+                className={`nav-btn ${platform === p ? "active" : ""}`}
                 onClick={() => handlePlatformClick(p)}
               >
                 {p.charAt(0).toUpperCase() + p.slice(1)}
@@ -52,16 +37,13 @@ export default function Header({ platform, setPlatform }) {
             ))}
           </nav>
 
-          {/* ACTIONS */}
-          <div className="actions">
-
-            <button
-              className="menu-btn mobile-only"
-              onClick={() => setMobileOpen(true)}
-            >
-              ☰
-            </button>
-          </div>
+          {/* MOBILE MENU BTN */}
+          <button
+            className="menu-btn mobile-only"
+            onClick={() => setMobileOpen(true)}
+          >
+            ☰
+          </button>
         </div>
       </header>
 
@@ -71,23 +53,27 @@ export default function Header({ platform, setPlatform }) {
           <div className="mobile-top">
             <div className="logo">
               <span className="dot" />
-              BANANA PROMPTS
+              VIDO PROMPT
             </div>
-            <button className="mobile-menu-close" onClick={() => setMobileOpen(false)}>✕</button>
+            <button
+              className="mobile-menu-close"
+              onClick={() => setMobileOpen(false)}
+            >
+              ✕
+            </button>
           </div>
 
           <div className="mobile-links">
             {PLATFORMS.map(p => (
               <button
                 key={p}
-                className={currentPlatform === p ? "active" : ""}
+                className={platform === p ? "active" : ""}
                 onClick={() => handlePlatformClick(p)}
               >
                 {p.charAt(0).toUpperCase() + p.slice(1)}
               </button>
             ))}
           </div>
-
         </div>
       )}
     </>
