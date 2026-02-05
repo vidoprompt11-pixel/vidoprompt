@@ -4,8 +4,6 @@
     grid-template-columns: 1fr 1.5fr;
     gap: 32px;
     padding: 32px;
-    background: radial-gradient(circle at top, #0b1020, #05070f);
-    /* min-height: 100vh; */
     color: #fff;
 }
 

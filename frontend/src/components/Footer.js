@@ -13,7 +13,7 @@ const Footer = () => {
 
       <div className="footer-content">
         <p className="footer-copy">
-          © 2026 <span>Banana Prompts</span>
+          © 2026 <span>Vido Prompt</span>
         </p>
 
         <div className="footer-links">
