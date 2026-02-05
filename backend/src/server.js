@@ -12,28 +12,55 @@ dotenv.config();
 
 const app = express();
 
-// ESM fix for __dirname
+// ESM __dirname fix
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // middleware
-app.use(cors());
+app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 
-// ⭐ serve uploads folder
+// serve uploads (LOCAL only, Vercel ignore kare)
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // routes
 app.use("/api/videos", videoRoutes);
 app.use("/api/admin", adminRoutes);
 
-// mongo connect
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.error(err));
+// health check (Vercel mate important)
+app.get("/", (req, res) => {
+  res.json({ success: true, message: "Backend running 🚀" });
+});
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () =>
-  console.log(`🚀 Server running on port ${PORT}`)
-);
+// ===== MongoDB (Vercel + Local safe) =====
+let cached = global.mongoose;
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+async function connectDB() {
+  if (cached.conn) return cached.conn;
+
+  if (!cached.promise) {
+    cached.promise = mongoose
+      .connect(process.env.MONGO_URI)
+      .then(m => m);
+  }
+
+  cached.conn = await cached.promise;
+  console.log("MongoDB connected");
+  return cached.conn;
+}
+
+connectDB();
+
+// 👉 Vercel mate REQUIRED
+export default app;
+
+// 👉 Local development mate j server listen
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+}
