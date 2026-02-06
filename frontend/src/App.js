@@ -10,13 +10,11 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* ROOT = INSTAGRAM HOME */}
+        {/* ROOT = INSTAGRAM */}
         <Route path="/" element={<Home />} />
 
-        {/* PLATFORM PAGES */}
-        <Route path="/instagram" element={<Home />} />
-        <Route path="/youtube" element={<Home />} />
-        <Route path="/tiktok" element={<Home />} />
+        {/* PLATFORM ROUTE */}
+        <Route path="/:platform" element={<Home />} />
 
         {/* OTHER PAGES */}
         <Route path="/video/:id" element={<VideoDetail />} />
