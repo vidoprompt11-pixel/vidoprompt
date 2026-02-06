@@ -5,43 +5,6 @@ import "../styles/terms.css";
 
 const sections = [
     {
-        title: "Information We Collect",
-        text:
-            "When you use Banana Prompts, we collect information to provide and improve our services. This includes information you provide directly and data collected automatically.",
-        bullets: [
-            "Account information: email address, username, and authentication credentials (via Google OAuth)",
-            "Content you submit: AI-generated images, prompts, tags, and metadata",
-            "Usage data: pages visited, features used, and interactions with content",
-            "Device information: browser type, IP address, and operating system",
-            "Payment information: processed securely through Creem (we do not store credit card details)"
-        ]
-    },
-    {
-        title: "How We Use Your Information",
-        text:
-            "We use the information we collect to operate, maintain, and improve Banana Prompts. Your data helps us provide a better experience for the entire community.",
-        bullets: [
-            "Authentication and account management",
-            "Storing and displaying your submitted content in the gallery",
-            "Processing payments and managing subscriptions",
-            "Analyzing usage patterns to improve features and performance",
-            "Communicating important updates about the service",
-            "Preventing abuse, spam, and security threats"
-        ]
-    },
-    {
-        title: "Third-Party Services",
-        text:
-            "Banana Prompts integrates with trusted third-party services to provide core functionality. These services have their own privacy policies and data practices.",
-        bullets: [
-            "Supabase: Authentication, database, and user management",
-            "Cloudflare R2: Image storage and content delivery",
-            "Creem: Payment processing and subscription management",
-            "OpenAI: AI video generation via Sora 2 API",
-            "Vercel: Web hosting and infrastructure"
-        ]
-    },
-    {
         title: "Data Sharing and Disclosure",
         text:
             "We do not sell your personal information. We only share data in limited circumstances necessary to operate the service or comply with legal obligations.",
@@ -66,7 +29,7 @@ const sections = [
     {
         title: "Your Rights and Choices",
         text:
-            "You have control over your data and how it's used on Banana Prompts. You can exercise these rights at any time through your account settings or by contacting us.  ",
+            "You have control over your data and how it's used on Vido Prompt. You can exercise these rights at any time through your account settings or by contacting us.  ",
         bullets: [
             "Access: View and download your personal information",
             "Correction: Update inaccurate or incomplete data",
@@ -88,7 +51,7 @@ const sections = [
     {
         title: "Children's Privacy",
         text:
-            "Banana Prompts is not intended for children under 13. We do not knowingly collect personal information from children. If we learn we have collected data from a child under 13, we will delete it promptly.",
+            "Vido Prompt is not intended for children under 13. We do not knowingly collect personal information from children. If we learn we have collected data from a child under 13, we will delete it promptly.",
     },
     {
         title: "International Data Transfers",
@@ -105,12 +68,12 @@ const sections = [
         text:
             "If you have questions about this Privacy Policy or how we handle your data, please reach out to us. We're committed to addressing your privacy concerns.",
         text:
-            "Email support@bananaprompts.xyz",
+            "Email Vidoprompt11@gmail.com",
     },
     {
         title: "Quick Summary",
         text:
-            "We collect information necessary to operate Banana Prompts and provide you with a great experience. Your submitted content is public, but we never sell your personal data. You can request access, correction, or deletion of your information at any time. Questions? Contact us at support@bananaprompts.xyz.",
+            "We collect information necessary to operate Vido Prompt and provide you with a great experience. Your submitted content is public, but we never sell your personal data. You can request access, correction, or deletion of your information at any time. Questions? Contact us at vidoprompt11@gmail.com.",
     },
 ];
 
@@ -135,12 +98,12 @@ const Privacy = () => {
                     </h1>
 
                     <p>
-                        This Privacy Policy explains how Banana Prompts collects, <br></br>
+                        This Privacy Policy explains how Vido Prompt collects, <br></br>
                         uses, and protects your personal information. We believe <br></br>
                         in transparency and giving you control over your data.
                     </p>
 
-                    <small>Effective date: September 25, 2025</small>
+                    <small>Effective date: January 25, 2026</small>
                 </section>
 
                 {/* SECTIONS */}
