@@ -1,22 +1,23 @@
-export const SUB_CATEGORIES = {
+const SUB_CATEGORIES = {
   instagram: [
-    "Trending Viral",
-    "Reels Growth",
+    "Trending Reels",
+    "Entertainment Reels",
+    "Educational Reels",
+    "Promotional Reels",
     "AI Reels",
-    "Business Content",
-    "Faceless Reels",
   ],
   youtube: [
-    "YouTube Shorts",
-    "Long Form",
-    "Educational",
-    "Automation",
-    "Cash Cow",
+    "Skill Builder",
+    "Smart Systems",
+    "Long Play",
+    "Youtube Short",
+    "AI Tips",
   ],
   tiktok: [
-    "TikTok Viral",
-    "For You Page",
-    "Trending Sounds",
-    "Creators Growth",
+    "Vibes",
+    "Trends",
+    "Sound Picks",
+    "Growth",
+    "Explore",
   ],
 };
