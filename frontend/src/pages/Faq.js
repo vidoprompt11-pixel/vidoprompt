@@ -52,7 +52,7 @@ const sections = [
     {
         title: "How do I contact the Vido Prompt team?",
         text:
-            "Email us at support@bananaprompts.xyz or reach out on X (Twitter) @bananaprompts. We usually reply within 24–48 hours about everything from model compatibility to community initiatives.",
+            "Email us at vidoprompt11@gmail.com or reach out on X (Twitter) @vidoprompt. We usually reply within 24–48 hours about everything from model compatibility to community initiatives.",
     },
     {
         title: "Are there community guidelines for sharing prompts?",

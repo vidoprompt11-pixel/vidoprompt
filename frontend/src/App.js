@@ -9,17 +9,24 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Default redirect */}
-        <Route path="/" element={<Navigate to="/instagram" replace />} />
 
-        {/* Platform pages */}
-        <Route path="/:platform" element={<Home />} />
+        {/* ROOT → HOME */}
+        <Route path="/" element={<Navigate to="/home" replace />} />
 
-        {/* Other pages */}
+        {/* HOME (Instagram content) */}
+        <Route path="/home" element={<Home />} />
+
+        {/* PLATFORM PAGES */}
+        <Route path="/instagram" element={<Home />} />
+        <Route path="/youtube" element={<Home />} />
+        <Route path="/tiktok" element={<Home />} />
+
+        {/* OTHER PAGES */}
         <Route path="/video/:id" element={<VideoDetail />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/faq" element={<Faq />} />
+
       </Routes>
     </BrowserRouter>
   );

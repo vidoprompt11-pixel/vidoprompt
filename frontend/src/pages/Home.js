@@ -9,7 +9,7 @@ import Loader from "../components/Loader";
 import Footer from "../components/Footer";
 import "../styles/home.css";
 
-const VALID_PLATFORMS = ["instagram", "youtube", "tiktok"];
+const VALID_PLATFORMS = ["instagram", "youtube", "tiktok", "home"];
 
 const Home = () => {
   const { platform: platformParam } = useParams();
@@ -21,14 +21,20 @@ const Home = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // URL → state
+  // URL → STATE (home = instagram)
   useEffect(() => {
-    if (VALID_PLATFORMS.includes(platformParam)) {
+    if (!platformParam || platformParam === "home") {
+      setPlatform("instagram");
+    } else if (VALID_PLATFORMS.includes(platformParam)) {
       setPlatform(platformParam);
     } else {
-      navigate("/instagram", { replace: true });
+      navigate("/home", { replace: true });
     }
-  }, [platformParam]);
+
+    // reset filters on platform change
+    setSubCategory("");
+    setSearch("");
+  }, [platformParam, navigate]);
 
   // Fetch videos
   useEffect(() => {
@@ -46,7 +52,7 @@ const Home = () => {
       const res = await axios.get("/videos", { params });
       setVideos(res.data);
     } catch (err) {
-      console.error(err);
+      console.error("FETCH VIDEOS ERROR:", err);
     } finally {
       setLoading(false);
     }
@@ -54,7 +60,7 @@ const Home = () => {
 
   return (
     <>
-      <Header platform={platform} />
+      <Header />
 
       <div className="search-container">
         <SearchBar value={search} onChange={setSearch} />
@@ -70,9 +76,13 @@ const Home = () => {
         <Loader />
       ) : (
         <div className="video-grid container">
-          {videos.map(video => (
-            <VideoCard key={video._id} video={video} />
-          ))}
+          {videos.length === 0 ? (
+            <p className="no-data">No videos found</p>
+          ) : (
+            videos.map((video) => (
+              <VideoCard key={video._id} video={video} />
+            ))
+          )}
         </div>
       )}
 

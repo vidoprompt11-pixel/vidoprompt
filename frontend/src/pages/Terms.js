@@ -60,7 +60,7 @@ const sections = [
         text:
             "Have questions about these Terms or need to report a problem? Reach out to us so we can help keep the gallery healthy for everyone.",
         text:
-            "Email support@bananaprompts.xyz",
+            "Email vidoprompt11@gmail.com",
     },
     {
         title: "Need a quick summary?",
@@ -96,7 +96,7 @@ const Terms = () => {
                         maintain a respectful, inspiring space for AI artists everywhere. <br />
                     </p>
 
-                    <small>Effective date: September 25, 2025</small>
+                    <small>Effective date: January 25, 2026</small>
                 </section>
 
                 {/* SECTIONS */}
