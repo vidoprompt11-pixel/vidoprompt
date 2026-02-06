@@ -211,3 +211,24 @@ button.mobile-menu-close {
   color: #fff;
   font-size: 15px;
 }
+
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo-img {
+  height: 36px;
+  /* desktop */
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .logo-img {
+    height: 30px;
+    /* mobile */
+  }
+}

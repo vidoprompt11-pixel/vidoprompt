@@ -1,6 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import "../styles/header.css";
+import logo from "../VidoPrompt-logo.png";
+
 
 const PLATFORMS = ["instagram", "youtube", "tiktok"];
 
@@ -28,18 +30,17 @@ export default function Header() {
 
           {/* LOGO */}
           <div className="logo" onClick={() => navigate("/")}>
-            <span className="dot" />
-            VIDO PROMPT
+            <img src={logo} alt="Vido Prompt" className="logo-img" />
           </div>
+
 
           {/* DESKTOP NAV */}
           <nav className="nav desktop-only">
             {PLATFORMS.map((p) => (
               <button
                 key={p}
-                className={`nav-btn ${
-                  activePlatform === p ? "active" : ""
-                }`}
+                className={`nav-btn ${activePlatform === p ? "active" : ""
+                  }`}
                 onClick={() => handlePlatformClick(p)}
               >
                 {p.charAt(0).toUpperCase() + p.slice(1)}
@@ -61,10 +62,10 @@ export default function Header() {
       {mobileOpen && (
         <div className="mobile-menu">
           <div className="mobile-top">
-            <div className="logo" onClick={() => navigate("/home")}>
-              <span className="dot" />
-              VIDO PROMPT
+            <div className="logo" onClick={() => navigate("/")}>
+              <img src={logo} alt="Vido Prompt" className="logo-img" />
             </div>
+
             <button
               className="mobile-menu-close"
               onClick={() => setMobileOpen(false)}
