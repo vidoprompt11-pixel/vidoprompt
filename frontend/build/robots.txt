@@ -1,3 +1,18 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
+Disallow: /dashboard/
+Disallow: /account/
+Disallow: /settings/
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /billing/
+Disallow: /callback/
+Disallow: /redirect/
+Disallow: /*?*
+
+Allow: /
+
+Sitemap: https://vidoprompt.com/sitemap.xml
+
