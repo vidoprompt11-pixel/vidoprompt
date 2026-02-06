@@ -1,4 +1,4 @@
-const SUB_CATEGORIES = {
+export const SUB_CATEGORIES = {
   instagram: [
     "Trending Reels",
     "Entertainment Reels",

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import VideoDetail from "./pages/VideoDetail";
 import Terms from "./pages/Terms";
@@ -10,11 +10,8 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* ROOT → HOME */}
-        <Route path="/" element={<Navigate to="/home" replace />} />
-
-        {/* HOME (Instagram content) */}
-        <Route path="/home" element={<Home />} />
+        {/* ROOT = INSTAGRAM HOME */}
+        <Route path="/" element={<Home />} />
 
         {/* PLATFORM PAGES */}
         <Route path="/instagram" element={<Home />} />

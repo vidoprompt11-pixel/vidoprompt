@@ -14,7 +14,7 @@ export default function Header() {
 
   // treat /home as instagram
   const activePlatform =
-    path === "home" || path === "" ? "instagram" : path;
+    path === "" || path === "" ? "instagram" : path;
 
   const handlePlatformClick = (p) => {
     setMobileOpen(false);
@@ -27,7 +27,7 @@ export default function Header() {
         <div className="header-inner">
 
           {/* LOGO */}
-          <div className="logo" onClick={() => navigate("/home")}>
+          <div className="logo" onClick={() => navigate("/")}>
             <span className="dot" />
             VIDO PROMPT
           </div>

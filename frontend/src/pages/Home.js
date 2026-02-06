@@ -23,15 +23,14 @@ const Home = () => {
 
   // URL → STATE (home = instagram)
   useEffect(() => {
-    if (!platformParam || platformParam === "home") {
+    if (!platformParam) {
       setPlatform("instagram");
-    } else if (VALID_PLATFORMS.includes(platformParam)) {
+    } else if (["instagram", "youtube", "tiktok"].includes(platformParam)) {
       setPlatform(platformParam);
     } else {
-      navigate("/home", { replace: true });
+      navigate("/", { replace: true });
     }
 
-    // reset filters on platform change
     setSubCategory("");
     setSearch("");
   }, [platformParam, navigate]);
@@ -66,11 +65,14 @@ const Home = () => {
         <SearchBar value={search} onChange={setSearch} />
       </div>
 
-      <SubCategoryBar
-        platform={platform}
-        active={subCategory}
-        setActive={setSubCategory}
-      />
+      {platform && (
+        <SubCategoryBar
+          platform={platform}
+          active={subCategory}
+          setActive={setSubCategory}
+        />
+      )}
+
 
       {loading ? (
         <Loader />
