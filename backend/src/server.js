@@ -21,7 +21,7 @@ app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 
 // serve uploads (LOCAL only, Vercel ignore kare)
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+app.use("uploads", express.static(path.join(__dirname, "../uploads")));
 
 // routes
 app.use("/api/videos", videoRoutes);
