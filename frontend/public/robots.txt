@@ -10,9 +10,12 @@ Disallow: /checkout/
 Disallow: /billing/
 Disallow: /callback/
 Disallow: /redirect/
-Disallow: /*?*
 
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
 Sitemap: https://vidoprompt.com/sitemap.xml
+
 
