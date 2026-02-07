@@ -4,7 +4,7 @@ const instance = axios.create({
    baseURL:
     import.meta.env.MODE === "development"
       ? "http://localhost:5000/api"
-      : "https://vidoprompt-backend.vercel.app/api",
+      : "https://api.vidoprompt.com/api",
 });
 
 export default instance;

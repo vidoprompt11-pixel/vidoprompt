@@ -5,7 +5,7 @@ import "../styles/video-detail.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const BASE_URL = "https://vidoprompt-backend.vercel.app";
+const BASE_URL = "https://api.vidoprompt.com";
 
 export default function VideoDetail() {
   const { id } = useParams();
