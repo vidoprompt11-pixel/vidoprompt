@@ -13,7 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # ❌ node_modules, uploads copy ન થાય
       - name: Upload backend files
         uses: appleboy/scp-action@v0.1.7
         with:
