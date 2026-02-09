@@ -13,9 +13,4 @@ Disallow: /redirect/
 
 Allow: /
 
-User-agent: Googlebot
-Allow: /
-
-Sitemap: https://vidoprompt.com/sitemap.xml
-
-
+Sitemap: https://www.vidoprompt.com/sitemap.xml
