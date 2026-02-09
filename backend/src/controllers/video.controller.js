@@ -4,21 +4,25 @@ import Video from "../models/Video.js";
 export const uploadVideo = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ msg: "Video required" });
+      return res.status(400).json({ msg: "Video file required" });
     }
+
+    // ✅ Admin panel views (string → number)
+    const initialViews = Number(req.body.views) || 0;
 
     const video = await Video.create({
       ...req.body,
-      views: req.body.views || 0,
+      views: initialViews,              // 👈 IMPORTANT
       videoUrl: `/media/${req.file.filename}`,
     });
 
     res.json({ success: true, video });
   } catch (err) {
-    console.error("UPLOAD ERROR:", err);
+    console.error("UPLOAD VIDEO ERROR:", err);
     res.status(500).json({ message: err.message });
   }
 };
+
 
 // GET ALL
 export const getVideos = async (req, res) => {
