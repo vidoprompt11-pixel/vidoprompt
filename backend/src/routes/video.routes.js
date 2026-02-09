@@ -10,83 +10,46 @@ import {
 
 const router = express.Router();
 
-/* =========================
-   STORAGE (LOCAL + VERCEL)
-========================= */
-
-// Vercel par disk read-only hoy che
-// Vercel only /tmp allow kare che
-const isVercel = process.env.VERCEL === "1";
-
+// storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    if (isVercel) {
-      cb(null, "/tmp");      // ✅ Vercel safe
-    } else {
-      cb(null, "/root/vidoprompt-video");  // ✅ Local dev
-    }
+    cb(null, "/root/vidoprompt-video");
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
 
-/* =========================
-   VIDEO FILE FILTER
-========================= */
+// file filter
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = [
+  const allowed = [
     "video/mp4",
-    "video/quicktime",
     "video/webm",
+    "video/quicktime",
     "video/x-matroska",
-    "video/x-msvideo",
   ];
-
-  if (allowedTypes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(new Error("Only video files are allowed"), false);
-  }
+  allowed.includes(file.mimetype)
+    ? cb(null, true)
+    : cb(new Error("Only video files allowed"));
 };
 
 const upload = multer({
   storage,
   fileFilter,
-  limits: {
-    fileSize: 200 * 1024 * 1024, // 200MB
-  },
+  limits: { fileSize: 200 * 1024 * 1024 },
 });
 
-/* =========================
-   ROUTES
-========================= */
-
-// Upload video (admin/dashboard)
+// 🚨 AUTH MUST BE FIRST
 router.post(
   "/dashboard-upload",
-  (req, res, next) => {
-    upload.single("video")(req, res, function (err) {
-      if (err) {
-        console.error("MULTER ERROR:", err);
-        return res.status(400).json({ message: err.message });
-      }
-      next();
-    });
-  },
   auth,
+  upload.single("video"),
   uploadVideo
 );
 
-
-
-// Fetch all videos (frontend list)
+// public routes
 router.get("/", getVideos);
-
-// Increment views
 router.post("/:id/view", incrementView);
-
-// Get single video by ID
 router.get("/:id", getVideoById);
 
 export default router;
