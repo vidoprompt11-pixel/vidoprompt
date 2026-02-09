@@ -64,10 +64,12 @@ export default function VideoDetail() {
             ref={videoRef}
             src={`${BASE_URL}${video.videoUrl}`}
             muted
+            autoPlay
             controls
             playsInline
-            preload="metadata"
+            preload="auto"
           />
+
 
         </div>
 

@@ -4,28 +4,30 @@ import "../styles/video-card.css";
 
 const BASE_URL = "https://api.vidoprompt.com";
 
-const isMobile =
-  /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 export default function VideoCard({ video }) {
   const videoRef = useRef(null);
   const navigate = useNavigate();
 
-  // 🔥 AUTOPLAY ON LOAD
+  // 🔥 AUTOPLAY SAFE (iOS + Android + Desktop)
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
 
-    // must for iOS
     v.muted = true;
     v.playsInline = true;
+    v.preload = "auto";
 
-    const playPromise = v.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // iOS may block — user interaction needed
-      });
-    }
+    const playWhenReady = () => {
+      v.play().catch(() => {});
+    };
+
+    v.addEventListener("canplay", playWhenReady);
+
+    return () => {
+      v.removeEventListener("canplay", playWhenReady);
+    };
   }, []);
 
   const openDetail = async () => {
@@ -55,7 +57,7 @@ export default function VideoCard({ video }) {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         className="video-el"
       />
 
