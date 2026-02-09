@@ -65,7 +65,6 @@ const upload = multer({
 // Upload video (admin/dashboard)
 router.post(
   "/dashboard-upload",
-  auth,
   (req, res, next) => {
     upload.single("video")(req, res, function (err) {
       if (err) {
@@ -75,8 +74,10 @@ router.post(
       next();
     });
   },
+  auth,
   uploadVideo
 );
+
 
 
 // Fetch all videos (frontend list)
