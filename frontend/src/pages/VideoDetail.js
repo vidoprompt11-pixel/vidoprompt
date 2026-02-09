@@ -44,7 +44,7 @@ export default function VideoDetail() {
   };
 
   const PLATFORM_URLS = {
-    hookup: "https://www.bananaprompts.xyz",
+    hookup: "https://www.bananaprompts.xyz ",
     instagram: "https://www.instagram.com",
     youtube: "https://www.youtube.com",
     tiktok: "https://www.tiktok.com"
