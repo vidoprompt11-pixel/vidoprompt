@@ -66,9 +66,18 @@ const upload = multer({
 router.post(
   "/dashboard-upload",
   auth,
-  upload.single("video"),
+  (req, res, next) => {
+    upload.single("video")(req, res, function (err) {
+      if (err) {
+        console.error("MULTER ERROR:", err);
+        return res.status(400).json({ message: err.message });
+      }
+      next();
+    });
+  },
   uploadVideo
 );
+
 
 // Fetch all videos (frontend list)
 router.get("/", getVideos);
