@@ -10,7 +10,12 @@ Disallow: /checkout/
 Disallow: /billing/
 Disallow: /callback/
 Disallow: /redirect/
+Allow: /
 
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Facebot
 Allow: /
 
 Sitemap: https://www.vidoprompt.com/sitemap.xml
