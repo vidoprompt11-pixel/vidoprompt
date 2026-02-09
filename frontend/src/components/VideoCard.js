@@ -1,14 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/video-card.css";
 
 const BASE_URL = "https://api.vidoprompt.com";
-
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 export default function VideoCard({ video }) {
   const videoRef = useRef(null);
   const navigate = useNavigate();
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   // 🔥 AUTOPLAY SAFE (iOS + Android + Desktop)
   useEffect(() => {
@@ -51,6 +51,13 @@ export default function VideoCard({ video }) {
         if (!isMobile) videoRef.current?.play().catch(() => {});
       }}
     >
+      {/* 🔥 Skeleton Loader */}
+      {!videoLoaded && (
+        <div className="video-skeleton">
+          <div className="shimmer" />
+        </div>
+      )}
+
       <video
         ref={videoRef}
         src={`${BASE_URL}${video.videoUrl}`}
@@ -58,7 +65,8 @@ export default function VideoCard({ video }) {
         loop
         playsInline
         preload="auto"
-        className="video-el"
+        onLoadedData={() => setVideoLoaded(true)}   // ✅ IMPORTANT
+        className={videoLoaded ? "show" : "hide"}
       />
 
       <div className="video-overlay">
