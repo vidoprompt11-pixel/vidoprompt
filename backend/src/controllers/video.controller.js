@@ -12,7 +12,7 @@ export const uploadVideo = async (req, res) => {
     const video = await Video.create({
       ...req.body,
       views: req.body.views || 0,
-      videoUrl: `/uploads/${req.file.filename}`,
+      videoUrl: `/media/${req.file.filename}`,
     });
 
 

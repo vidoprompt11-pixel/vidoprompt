@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
     if (isVercel) {
       cb(null, "/tmp");      // ✅ Vercel safe
     } else {
-      cb(null, "uploads");  // ✅ Local dev
+      cb(null, "/root/vidoprompt-video");  // ✅ Local dev
     }
   },
   filename: (req, file, cb) => {

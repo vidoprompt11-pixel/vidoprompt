@@ -21,7 +21,17 @@ app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 
 // serve uploads (LOCAL only, Vercel ignore kare)
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+// 🎥 Serve videos from Ubuntu drive (NOT project root)
+app.use(
+  "/media",
+  express.static("/root/vidoprompt-video", {
+    setHeaders: (res) => {
+      res.setHeader("Accept-Ranges", "bytes");
+      res.setHeader("Content-Type", "video/mp4");
+    },
+  })
+);
+
 
 // routes
 app.use("/api/videos", videoRoutes);
