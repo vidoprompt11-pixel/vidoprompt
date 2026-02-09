@@ -1,35 +1,62 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/video-card.css";
 
 const BASE_URL = "https://api.vidoprompt.com";
 
+const isMobile =
+  /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 export default function VideoCard({ video }) {
   const videoRef = useRef(null);
   const navigate = useNavigate();
+
+  // 🔥 AUTOPLAY ON LOAD
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    // must for iOS
+    v.muted = true;
+    v.playsInline = true;
+
+    const playPromise = v.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // iOS may block — user interaction needed
+      });
+    }
+  }, []);
 
   const openDetail = async () => {
     try {
       await fetch(`${BASE_URL}/api/videos/${video._id}/view`, {
         method: "POST",
       });
-    } catch (err) {
-      console.error(err);
-    }
+    } catch {}
 
     navigate(`/video/${video._id}`);
   };
 
   return (
-    <div className="video-card" onClick={openDetail}>
-      {/* 🎥 VIDEO PREVIEW (NO AUTOPLAY) */}
+    <div
+      className="video-card"
+      onClick={openDetail}
+      onMouseEnter={() => {
+        if (!isMobile) videoRef.current?.pause();
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) videoRef.current?.play().catch(() => {});
+      }}
+    >
       <video
         ref={videoRef}
         src={`${BASE_URL}${video.videoUrl}`}
         muted
+        loop
         playsInline
         preload="metadata"
-        poster="/video-poster.jpg"
+        className="video-el"
       />
 
       <div className="video-overlay">
