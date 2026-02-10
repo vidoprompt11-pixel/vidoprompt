@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Install deps
         working-directory: ./frontend
@@ -23,11 +22,11 @@ jobs:
           CI: false
         run: npm run build
 
-      - name: Deploy frontend via SFTP (SCP)
-        uses: appleboy/scp-action@v0.1.7
+      - name: Deploy Frontend via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          host: ${{ secrets.SERVER_IP }}
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./frontend/build/*"
-          target: "/var/www/html"
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./frontend/build/
+          server-dir: /public_html/

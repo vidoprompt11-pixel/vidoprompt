@@ -17,33 +17,25 @@ export default function VideoCard({ video }) {
 
     v.muted = true;
     v.playsInline = true;
+    v.preload = "auto";
 
-    // 🔥 iOS SAFE
-    v.preload = isMobile ? "metadata" : "auto";
+    const playWhenReady = () => {
+      v.play().catch(() => {});
+    };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          v.play().catch(() => { });
-        } else {
-          v.pause();
-        }
-      },
-      { threshold: 0.6 }
-    );
+    v.addEventListener("canplay", playWhenReady);
 
-    observer.observe(v);
-
-    return () => observer.disconnect();
+    return () => {
+      v.removeEventListener("canplay", playWhenReady);
+    };
   }, []);
-
 
   const openDetail = async () => {
     try {
       await fetch(`${BASE_URL}/api/videos/${video._id}/view`, {
         method: "POST",
       });
-    } catch { }
+    } catch {}
 
     navigate(`/video/${video._id}`);
   };
@@ -56,7 +48,7 @@ export default function VideoCard({ video }) {
         if (!isMobile) videoRef.current?.pause();
       }}
       onMouseLeave={() => {
-        if (!isMobile) videoRef.current?.play().catch(() => { });
+        if (!isMobile) videoRef.current?.play().catch(() => {});
       }}
     >
       {/* 🔥 Skeleton Loader */}
@@ -72,11 +64,10 @@ export default function VideoCard({ video }) {
         muted
         loop
         playsInline
-        preload={isMobile ? "metadata" : "auto"}
-        onLoadedData={() => setVideoLoaded(true)}
+        preload="auto"
+        onLoadedData={() => setVideoLoaded(true)}   // ✅ IMPORTANT
         className={videoLoaded ? "show" : "hide"}
       />
-
 
       <div className="video-overlay">
         <div className="video-title">{video.title}</div>
