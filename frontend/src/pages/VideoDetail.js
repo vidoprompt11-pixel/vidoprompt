@@ -21,6 +21,25 @@ export default function VideoDetail() {
     fetchVideo();
   }, [id]);
 
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    v.muted = true;
+    v.playsInline = true;
+
+    const tryPlay = () => {
+      v.play().catch(() => { });
+    };
+
+    v.addEventListener("loadedmetadata", tryPlay);
+
+    return () => {
+      v.removeEventListener("loadedmetadata", tryPlay);
+    };
+  }, []);
+
+
   const fetchVideo = async () => {
     const res = await axios.get(`/videos/${id}`);
     setVideo(res.data);
@@ -64,12 +83,11 @@ export default function VideoDetail() {
             ref={videoRef}
             src={`${BASE_URL}${video.videoUrl}`}
             muted
-            autoPlay
             controls
             playsInline
             preload="metadata"
-            poster="/placeholder.jpg"
           />
+
 
 
         </div>

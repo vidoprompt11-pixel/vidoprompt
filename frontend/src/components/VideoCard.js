@@ -4,13 +4,11 @@ import "../styles/video-card.css";
 
 const BASE_URL = "https://api.vidoprompt.com";
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 export default function VideoCard({ video }) {
   const videoRef = useRef(null);
   const navigate = useNavigate();
   const [videoLoaded, setVideoLoaded] = useState(false);
-
 
   // 🔥 AUTOPLAY SAFE (iOS + Android + Desktop)
   useEffect(() => {
@@ -19,7 +17,24 @@ export default function VideoCard({ video }) {
 
     v.muted = true;
     v.playsInline = true;
-    v.preload = "metadata";
+
+    // 🔥 iOS SAFE
+    v.preload = isMobile ? "metadata" : "auto";
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          v.play().catch(() => { });
+        } else {
+          v.pause();
+        }
+      },
+      { threshold: 0.6 }
+    );
+
+    observer.observe(v);
+
+    return () => observer.disconnect();
   }, []);
 
 
@@ -41,11 +56,8 @@ export default function VideoCard({ video }) {
         if (!isMobile) videoRef.current?.pause();
       }}
       onMouseLeave={() => {
-        if (!isMobile && !isIOS) {
-          videoRef.current?.play().catch(() => { });
-        }
+        if (!isMobile) videoRef.current?.play().catch(() => { });
       }}
-
     >
       {/* 🔥 Skeleton Loader */}
       {!videoLoaded && (
@@ -60,10 +72,11 @@ export default function VideoCard({ video }) {
         muted
         loop
         playsInline
-        preload="metadata"
-        onLoadedData={() => setVideoLoaded(true)}   // ✅ IMPORTANT
+        preload={isMobile ? "metadata" : "auto"}
+        onLoadedData={() => setVideoLoaded(true)}
         className={videoLoaded ? "show" : "hide"}
       />
+
 
       <div className="video-overlay">
         <div className="video-title">{video.title}</div>
