@@ -4,11 +4,13 @@ import "../styles/video-card.css";
 
 const BASE_URL = "https://api.vidoprompt.com";
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 export default function VideoCard({ video }) {
   const videoRef = useRef(null);
   const navigate = useNavigate();
   const [videoLoaded, setVideoLoaded] = useState(false);
+
 
   // 🔥 AUTOPLAY SAFE (iOS + Android + Desktop)
   useEffect(() => {
@@ -17,25 +19,16 @@ export default function VideoCard({ video }) {
 
     v.muted = true;
     v.playsInline = true;
-    v.preload = "auto";
-
-    const playWhenReady = () => {
-      v.play().catch(() => {});
-    };
-
-    v.addEventListener("canplay", playWhenReady);
-
-    return () => {
-      v.removeEventListener("canplay", playWhenReady);
-    };
+    v.preload = "metadata";
   }, []);
+
 
   const openDetail = async () => {
     try {
       await fetch(`${BASE_URL}/api/videos/${video._id}/view`, {
         method: "POST",
       });
-    } catch {}
+    } catch { }
 
     navigate(`/video/${video._id}`);
   };
@@ -48,8 +41,11 @@ export default function VideoCard({ video }) {
         if (!isMobile) videoRef.current?.pause();
       }}
       onMouseLeave={() => {
-        if (!isMobile) videoRef.current?.play().catch(() => {});
+        if (!isMobile && !isIOS) {
+          videoRef.current?.play().catch(() => { });
+        }
       }}
+
     >
       {/* 🔥 Skeleton Loader */}
       {!videoLoaded && (
@@ -64,7 +60,7 @@ export default function VideoCard({ video }) {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         onLoadedData={() => setVideoLoaded(true)}   // ✅ IMPORTANT
         className={videoLoaded ? "show" : "hide"}
       />
