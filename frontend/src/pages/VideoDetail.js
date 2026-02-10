@@ -68,7 +68,6 @@ export default function VideoDetail() {
             controls
             playsInline
             preload="metadata"
-
           />
 
 
