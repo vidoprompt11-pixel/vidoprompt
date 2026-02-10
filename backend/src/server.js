@@ -31,7 +31,6 @@ app.use(
 );
 
 
-//////////////
 
 // routes
 app.use("/api/videos", videoRoutes);
