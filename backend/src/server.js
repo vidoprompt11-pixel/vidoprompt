@@ -4,7 +4,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import fs from "fs";
 
 import videoRoutes from "./routes/video.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
@@ -30,41 +29,6 @@ app.use(
     },
   })
 );
-
-app.get("/media/:filename", (req, res) => {
-  const videoPath = `/root/vidoprompt-video/${req.params.filename}`;
-  const stat = fs.statSync(videoPath);
-  const fileSize = stat.size;
-  const range = req.headers.range;
-
-  if (range) {
-    const parts = range.replace(/bytes=/, "").split("-");
-    const start = parseInt(parts[0], 10);
-    const end = parts[1]
-      ? parseInt(parts[1], 10)
-      : fileSize - 1;
-
-    const chunkSize = end - start + 1;
-    const file = fs.createReadStream(videoPath, { start, end });
-
-    res.writeHead(206, {
-      "Content-Range": `bytes ${start}-${end}/${fileSize}`,
-      "Accept-Ranges": "bytes",
-      "Content-Length": chunkSize,
-      "Content-Type": "video/mp4",
-      "Cache-Control": "public, max-age=31536000"
-    });
-
-    file.pipe(res);
-  } else {
-    res.writeHead(200, {
-      "Content-Length": fileSize,
-      "Content-Type": "video/mp4",
-    });
-    fs.createReadStream(videoPath).pipe(res);
-  }
-});
-
 
 
 //////////////

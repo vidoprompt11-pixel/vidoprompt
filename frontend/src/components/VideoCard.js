@@ -4,8 +4,6 @@ import "../styles/video-card.css";
 
 const BASE_URL = "https://api.vidoprompt.com";
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
 
 export default function VideoCard({ video }) {
   const videoRef = useRef(null);
@@ -19,13 +17,10 @@ export default function VideoCard({ video }) {
 
     v.muted = true;
     v.playsInline = true;
-    v.preload = "metadata";
-
-    // ❌ iOS ma autoplay try j nathi karvu
-    if (isIOS) return;
+    v.preload = "auto";
 
     const playWhenReady = () => {
-      v.play().catch(() => { });
+      v.play().catch(() => {});
     };
 
     v.addEventListener("canplay", playWhenReady);
@@ -35,14 +30,12 @@ export default function VideoCard({ video }) {
     };
   }, []);
 
-
-
   const openDetail = async () => {
     try {
       await fetch(`${BASE_URL}/api/videos/${video._id}/view`, {
         method: "POST",
       });
-    } catch { }
+    } catch {}
 
     navigate(`/video/${video._id}`);
   };
@@ -55,7 +48,7 @@ export default function VideoCard({ video }) {
         if (!isMobile) videoRef.current?.pause();
       }}
       onMouseLeave={() => {
-        if (!isMobile) videoRef.current?.play().catch(() => { });
+        if (!isMobile) videoRef.current?.play().catch(() => {});
       }}
     >
       {/* 🔥 Skeleton Loader */}
@@ -69,12 +62,12 @@ export default function VideoCard({ video }) {
         ref={videoRef}
         src={`${BASE_URL}${video.videoUrl}`}
         muted
-        loop={!isIOS}
+        loop
         playsInline
-        preload="metadata"
-        onLoadedData={() => setVideoLoaded(true)}
+        preload="auto"
+        onLoadedData={() => setVideoLoaded(true)}   // ✅ IMPORTANT
+        className={videoLoaded ? "show" : "hide"}
       />
-
 
       <div className="video-overlay">
         <div className="video-title">{video.title}</div>
