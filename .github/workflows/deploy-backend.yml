@@ -10,40 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repo
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2️⃣ Upload backend files to VPS via SCP (SFTP)
-      - name: Upload backend files to VPS
+      - name: Upload backend files
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           source: "backend/*"
           target: "/var/www/vidoprompt/backend"
           strip_components: 1
-          overwrite: true
 
-      # 3️⃣ Install deps + restart backend with PM2
-      - name: Install deps & restart backend
+      - name: Restart backend with PM2
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-            set -e
             cd /var/www/vidoprompt/backend
-
-            echo "📦 Installing dependencies..."
             npm install --omit=dev
-
-            echo "🚀 Restarting backend with PM2..."
             pm2 restart vidoprompt-backend || pm2 start server.js --name vidoprompt-backend
-
             pm2 save
-            echo "✅ Backend deployed successfully"
