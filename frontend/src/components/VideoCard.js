@@ -4,31 +4,25 @@ import "../styles/video-card.css";
 
 const BASE_URL = "https://api.vidoprompt.com";
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-export default function VideoCard({ video }) {
+export default function VideoCard({ video, iosUnlocked }) {
   const videoRef = useRef(null);
   const navigate = useNavigate();
   const [videoLoaded, setVideoLoaded] = useState(false);
 
-  // 🔥 AUTOPLAY SAFE (iOS + Android + Desktop)
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
 
     v.muted = true;
     v.playsInline = true;
-    v.preload = "auto";
+    v.preload = "metadata";
 
-    const playWhenReady = () => {
+    if (!isIOS || iosUnlocked) {
       v.play().catch(() => {});
-    };
-
-    v.addEventListener("canplay", playWhenReady);
-
-    return () => {
-      v.removeEventListener("canplay", playWhenReady);
-    };
-  }, []);
+    }
+  }, [iosUnlocked]);
 
   const openDetail = async () => {
     try {
@@ -51,7 +45,6 @@ export default function VideoCard({ video }) {
         if (!isMobile) videoRef.current?.play().catch(() => {});
       }}
     >
-      {/* 🔥 Skeleton Loader */}
       {!videoLoaded && (
         <div className="video-skeleton">
           <div className="shimmer" />
@@ -64,8 +57,8 @@ export default function VideoCard({ video }) {
         muted
         loop
         playsInline
-        preload="auto"
-        onLoadedData={() => setVideoLoaded(true)}   // ✅ IMPORTANT
+        preload="metadata"
+        onLoadedData={() => setVideoLoaded(true)}
         className={videoLoaded ? "show" : "hide"}
       />
 

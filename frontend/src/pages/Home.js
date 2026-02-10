@@ -9,7 +9,7 @@ import Loader from "../components/Loader";
 import Footer from "../components/Footer";
 import "../styles/home.css";
 
-const VALID_PLATFORMS = ["instagram", "youtube", "tiktok", "home"];
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 const Home = () => {
   const { platform: platformParam } = useParams();
@@ -21,7 +21,10 @@ const Home = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // URL → STATE (home = instagram)
+  // 🔓 iOS autoplay unlock
+  const [iosUnlocked, setIosUnlocked] = useState(!isIOS);
+
+  // URL → STATE
   useEffect(() => {
     if (!platformParam) {
       setPlatform("instagram");
@@ -34,6 +37,22 @@ const Home = () => {
     setSubCategory("");
     setSearch("");
   }, [platformParam, navigate]);
+
+  // iOS first touch unlock
+  useEffect(() => {
+    if (!isIOS) return;
+
+    const unlock = () => {
+      setIosUnlocked(true);
+      document.removeEventListener("touchstart", unlock);
+    };
+
+    document.addEventListener("touchstart", unlock, { once: true });
+
+    return () => {
+      document.removeEventListener("touchstart", unlock);
+    };
+  }, []);
 
   // Fetch videos
   useEffect(() => {
@@ -61,6 +80,13 @@ const Home = () => {
     <>
       <Header />
 
+      {/* iOS hint */}
+      {isIOS && !iosUnlocked && (
+        <div style={{ textAlign: "center", padding: "8px", fontSize: "14px" }}>
+          Tap anywhere to enable video previews
+        </div>
+      )}
+
       <div className="search-container">
         <SearchBar value={search} onChange={setSearch} />
       </div>
@@ -73,7 +99,6 @@ const Home = () => {
         />
       )}
 
-
       {loading ? (
         <Loader />
       ) : (
@@ -82,7 +107,11 @@ const Home = () => {
             <p className="no-data">No videos found</p>
           ) : (
             videos.map((video) => (
-              <VideoCard key={video._id} video={video} />
+              <VideoCard
+                key={video._id}
+                video={video}
+                iosUnlocked={iosUnlocked}
+              />
             ))
           )}
         </div>
