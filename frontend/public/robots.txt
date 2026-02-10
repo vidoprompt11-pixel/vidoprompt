@@ -18,4 +18,4 @@ Allow: /
 User-agent: Facebot
 Allow: /
 
-Sitemap:https://vidoprompt.com//sitemap.xml
+Sitemap: https://www.vidoprompt.com/sitemap.xml
