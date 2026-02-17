@@ -9,21 +9,22 @@ import videoRoutes from "./routes/video.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import platformRoutes from "./routes/platform.routes.js";
 
-
-
 dotenv.config();
 
 const app = express();
 
-// ESM dirname fix
+/* ================= ESM DIRNAME FIX ================= */
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// middleware
+/* ================= MIDDLEWARE ================= */
+
 app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 
-// 🎥 Serve videos from Ubuntu disk
+/* ================= STATIC MEDIA ================= */
+
 app.use(
   "/media",
   express.static("/root/vidoprompt-video", {
@@ -33,43 +34,38 @@ app.use(
   })
 );
 
-//////////////
+/* ================= ROUTES ================= */
 
-// routes
 app.use("/api/videos", videoRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/platform-buttons", platformRoutes);
 
+/* ================= HEALTH CHECK ================= */
 
-// health check
 app.get("/", (req, res) => {
   res.json({ success: true, message: "Backend running 🚀" });
 });
 
-// ===== MongoDB =====
-let cached = global.mongoose;
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+/* ================= DATABASE CONNECTION ================= */
 
 async function connectDB() {
-  if (cached.conn) return cached.conn;
-
-  cached.promise = mongoose.connect(process.env.MONGO_URI).then(m => m);
-  cached.conn = await cached.promise;
-
-  console.log("MongoDB connected");
-  return cached.conn;
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("✅ MongoDB connected");
+  } catch (error) {
+    console.error("❌ MongoDB connection failed:", error);
+    process.exit(1);
+  }
 }
 
-connectDB();
+/* ================= START SERVER ================= */
+
+const PORT = process.env.PORT || 5000;
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+});
 
 export default app;
-
-// Local only
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () =>
-    console.log(`🚀 Server running on ${PORT}`)
-  );
-}
