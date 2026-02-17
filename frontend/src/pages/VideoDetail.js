@@ -12,58 +12,67 @@ export default function VideoDetail() {
   const videoRef = useRef(null);
 
   const [video, setVideo] = useState(null);
-  const [related, setRelated] = useState([]);
   const [platformButtons, setPlatformButtons] = useState([]);
   const [toast, setToast] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  /* ================= LOAD DATA ================= */
 
   useEffect(() => {
-    fetchVideo();
-    fetchPlatformButtons();
+    if (!id) return;
+
+    const loadData = async () => {
+      try {
+        setLoading(true);
+
+        // Fetch Video
+        const videoRes = await axios.get(`/videos/${id}`);
+        setVideo(videoRes.data);
+
+        // Fetch Buttons
+        const btnRes = await axios.get("/platform-buttons");
+        setPlatformButtons(btnRes.data?.buttons || []);
+
+      } catch (err) {
+        console.error("LOAD ERROR:", err);
+      } finally {
+        setLoading(false);   // 🔥 THIS WAS MISSING
+      }
+    };
+
+    loadData();
   }, [id]);
-
-  /* ================= FETCH VIDEO ================= */
-
-  const fetchVideo = async () => {
-    try {
-      const res = await axios.get(`/videos/${id}`);
-      setVideo(res.data);
-
-      const relatedRes = await axios.get("/videos", {
-        params: {
-          platform: res.data.platform,
-          subCategory: res.data.subCategory,
-        },
-      });
-
-      setRelated(
-        relatedRes.data.filter(v => v._id !== id).slice(0, 4)
-      );
-    } catch (err) {
-      console.error("VIDEO FETCH ERROR:", err);
-    }
-  };
-
-  /* ================= FETCH GLOBAL BUTTONS ================= */
-
-  const fetchPlatformButtons = async () => {
-    try {
-      const res = await axios.get("/platform-buttons");
-      setPlatformButtons(res.data?.buttons || []);
-    } catch (err) {
-      console.error("BUTTON FETCH ERROR:", err);
-    }
-  };
 
   /* ================= COPY PROMPT ================= */
 
   const copyPrompt = () => {
     if (!video?.promptText) return;
+
     navigator.clipboard.writeText(video.promptText);
     setToast("Prompt copied!");
-    setTimeout(() => setToast(""), 2000);
+
+    setTimeout(() => {
+      setToast("");
+    }, 2000);
   };
 
+  /* ================= LOADING UI ================= */
+
+  if (loading) {
+    return (
+      <div>
+        <Header />
+        <div className="detail-wrapper container">
+          <p style={{ color: "#fff" }}>Loading...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   if (!video) return null;
+
+  /* ================= UI ================= */
 
   return (
     <div>
@@ -118,10 +127,10 @@ export default function VideoDetail() {
                     key={index}
                     href={btn.url}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="try-link"
                   >
-                    {btn.name.toUpperCase()}
+                    {btn.name}
                   </a>
                 ))}
               </div>
@@ -130,7 +139,12 @@ export default function VideoDetail() {
 
         </div>
 
-        {toast && <div className="toast">{toast}</div>}
+        {toast && (
+          <div className="toast">
+            {toast}
+          </div>
+        )}
+
       </div>
 
       <Footer />
