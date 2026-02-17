@@ -46,6 +46,11 @@ app.get("/", (req, res) => {
   res.json({ success: true, message: "Backend running 🚀" });
 });
 
+app.get("/api/test-platform", (req, res) => {
+  res.json({ success: true });
+});
+
+
 /* ================= DATABASE CONNECTION ================= */
 
 async function connectDB() {
