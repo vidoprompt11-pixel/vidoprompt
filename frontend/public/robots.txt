@@ -1,21 +1,16 @@
 User-agent: *
+Allow: /
+
+# Important pages
+Allow: /ai-video-prompt-generator
+Allow: /video/
+Allow: /faq
+Allow: /privacy
+Allow: /terms
+
+# Block unnecessary files
 Disallow: /api/
-Disallow: /login
-Disallow: /signup
-Disallow: /dashboard/
-Disallow: /account/
-Disallow: /settings/
+Disallow: /*.json$
 Disallow: /admin/
-Disallow: /checkout/
-Disallow: /billing/
-Disallow: /callback/
-Disallow: /redirect/
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Facebot
-Allow: /
 
 Sitemap: https://www.vidoprompt.com/sitemap.xml
