@@ -7,6 +7,9 @@ import { fileURLToPath } from "url";
 
 import videoRoutes from "./routes/video.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
+import platformRoutes from "./routes/platform.routes.js";
+
+
 
 dotenv.config();
 
@@ -35,6 +38,8 @@ app.use(
 // routes
 app.use("/api/videos", videoRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/platform-buttons", platformRoutes);
+
 
 // health check
 app.get("/", (req, res) => {
