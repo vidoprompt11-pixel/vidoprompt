@@ -4,6 +4,7 @@ import VideoDetail from "./pages/VideoDetail";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Faq from "./pages/Faq";
+import AiVideoPromptGeneratorPage from "./pages/AiVideoPromptGeneratorPage";
 
 function App() {
   return (
@@ -12,6 +13,11 @@ function App() {
 
         {/* ROOT = INSTAGRAM */}
         <Route path="/" element={<Home />} />
+  
+       <Route
+          path="/ai-video-prompt-generator"
+          element={<AiVideoPromptGeneratorPage />}
+            
 
         {/* PLATFORM ROUTE */}
         <Route path="/:platform" element={<Home />} />
