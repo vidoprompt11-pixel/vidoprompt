@@ -1,16 +1,4 @@
 User-agent: *
 Allow: /
 
-# Important pages
-Allow: /ai-video-prompt-generator
-Allow: /video/
-Allow: /faq
-Allow: /privacy
-Allow: /terms
-
-# Block unnecessary files
-Disallow: /api/
-Disallow: /*.json$
-Disallow: /admin/
-
 Sitemap: https://www.vidoprompt.com/sitemap.xml
