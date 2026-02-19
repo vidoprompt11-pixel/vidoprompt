@@ -14,14 +14,6 @@ Disallow: /admin/
 Disallow: /private/
 Disallow: /tmp/
 Disallow: /draft/
-Disallow: /*?*
-Disallow: /*&*
-Disallow: /*.json$
-Disallow: /*.map$
-
-# --- Crawl controls (optional) ---
-# Crawl-delay is ignored by Google, but some bots respect it
-Crawl-delay: 2
 
 # --- Sitemap ---
 Sitemap: https://www.vidoprompt.com/sitemap.xml
