@@ -13,11 +13,11 @@ function App() {
 
         {/* ROOT = INSTAGRAM */}
         <Route path="/" element={<Home />} />
-  
-       <Route
+
+        <Route
           path="/ai-video-prompt-generator"
-          element={<AiVideoPromptGeneratorPage />}
-            
+          element={<AiVideoPromptGeneratorPage />}></Route>
+
 
         {/* PLATFORM ROUTE */}
         <Route path="/:platform" element={<Home />} />
