@@ -1,4 +1,27 @@
 User-agent: *
 Allow: /
 
+# --- Important Public Pages ---
+Allow: /ai-video-prompt-generator
+Allow: /faq
+Allow: /privacy
+Allow: /terms
+Allow: /video/
+
+# --- Block Unwanted / Private Areas (if any) ---
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /draft/
+Disallow: /*?*
+Disallow: /*&*
+Disallow: /*.json$
+Disallow: /*.map$
+
+# --- Crawl controls (optional) ---
+# Crawl-delay is ignored by Google, but some bots respect it
+Crawl-delay: 2
+
+# --- Sitemap ---
 Sitemap: https://www.vidoprompt.com/sitemap.xml
