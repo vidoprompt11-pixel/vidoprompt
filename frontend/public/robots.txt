@@ -16,4 +16,4 @@ Disallow: /tmp/
 Disallow: /draft/
 
 # --- Sitemap ---
-Sitemap: https://www.vidoprompt.com/sitemap.xml
+Sitemap: https://vidoprompt.com/sitemap.xml
