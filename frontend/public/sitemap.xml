@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns="http://sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
 >
 
   <!-- Home -->
   <url>
-    <loc>https://www.vidoprompt.com/</loc>
+    <loc>https://vidoprompt.com/</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -14,7 +14,7 @@
 
   <!-- Main SEO Landing Page -->
   <url>
-    <loc>https://www.vidoprompt.com/ai-video-prompt-generator</loc>
+    <loc>https://vidoprompt.com/ai-video-prompt-generator</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -22,21 +22,21 @@
 
   <!-- Static Pages -->
   <url>
-    <loc>https://www.vidoprompt.com/faq</loc>
+    <loc>https://vidoprompt.com/faq</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://www.vidoprompt.com/privacy</loc>
+    <loc>https://vidoprompt.com/privacy</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://www.vidoprompt.com/terms</loc>
+    <loc>https://vidoprompt.com/terms</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -44,21 +44,21 @@
 
   <!-- Platform Routes (since you have "/:platform") -->
   <url>
-    <loc>https://www.vidoprompt.com/instagram</loc>
+    <loc>https://vidoprompt.com/instagram</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.vidoprompt.com/youtube</loc>
+    <loc>https://vidoprompt.com/youtube</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.vidoprompt.com/tiktok</loc>
+    <loc>https://vidoprompt.com/tiktok</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -73,7 +73,7 @@
   <!-- Example real video pages (ONLY if these exist publicly) -->
   <!--
   <url>
-    <loc>https://www.vidoprompt.com/video/123</loc>
+    <loc>https://vidoprompt.com/video/123</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
