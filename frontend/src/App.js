@@ -5,6 +5,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Faq from "./pages/Faq";
 import AiVideoPromptGeneratorPage from "./pages/AiVideoPromptGeneratorPage";
+import { Link } from "react-router-dom";
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
         <Route path="/faq" element={<Faq />} />
 
       </Routes>
+        <footer style={{ textAlign: "center", padding: "20px" }}>
+        <a href="/ai-prompts-for-instagram">AI Prompts for Instagram</a> |{" "}
+        <a href="/ai-prompts-for-tiktok">AI Prompts for TikTok</a>
+      </footer>
+          
     </BrowserRouter>
   );
 }
