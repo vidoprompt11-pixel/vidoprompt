@@ -4,77 +4,45 @@
   <!-- Home -->
   <url>
     <loc>https://vidoprompt.com/</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Main SEO Landing Page -->
+  <!-- Generator -->
   <url>
     <loc>https://vidoprompt.com/ai-video-prompt-generator</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Platform Pages -->
+  <url>
+    <loc>https://vidoprompt.com/instagram</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://vidoprompt.com/tiktok</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://vidoprompt.com/youtube</loc>
+    <priority>0.8</priority>
   </url>
 
   <!-- Static Pages -->
   <url>
     <loc>https://vidoprompt.com/faq</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://vidoprompt.com/privacy</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://vidoprompt.com/terms</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <!-- Platform Routes (since you have "/:platform") -->
-  <url>
-    <loc>https://vidoprompt.com/instagram</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://vidoprompt.com/youtube</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://vidoprompt.com/tiktok</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Example dynamic pattern note:
-       DO NOT put /video/:id here.
-       Only real URLs should be in sitemap.
-       If you have top video pages, add them manually like below.
-  -->
-
-  <!-- Example real video pages (ONLY if these exist publicly) -->
-  <!--
-  <url>
-    <loc>https://vidoprompt.com/video/123</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
-  -->
 
 </urlset>
