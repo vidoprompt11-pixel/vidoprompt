@@ -4,6 +4,7 @@ import axios from "../api/axios";
 import "../styles/video-detail.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Helmet } from "react-helmet";
 
 const BASE_URL = "https://api.vidoprompt.com";
 
@@ -76,6 +77,32 @@ export default function VideoDetail() {
 
   return (
     <div>
+
+    <Helmet>
+  <title>
+    {video.promptTitle} AI Video Prompt for Reels & Shorts
+  </title>
+
+  <meta
+    name="description"
+    content={`${video.promptTitle} cinematic AI video prompt for Instagram reels, TikTok and YouTube shorts. Create viral content using AI tools.`}
+  />
+
+  <meta property="og:title" content={video.promptTitle} />
+  <meta
+    property="og:description"
+    content={`${video.promptTitle} AI video prompt`}
+  />
+  <meta
+    property="og:image"
+    content={`${BASE_URL}${video.thumbnail}`}
+  />
+</Helmet>
+
+<h1 style={{ display: "none" }}>
+  {video.promptTitle} AI Video Prompt for Reels
+</h1>
+    
       <Header />
 
       <div className="detail-wrapper container">
