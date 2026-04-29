@@ -8,6 +8,7 @@ import VideoCard from "../components/VideoCard";
 import Loader from "../components/Loader";
 import Footer from "../components/Footer";
 import "../styles/home.css";
+import { Helmet } from "react-helmet";
 
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -78,6 +79,40 @@ const Home = () => {
 
   return (
     <>
+
+     <Helmet>
+      <title>
+        {platform === "instagram" && "AI Prompts for Instagram Reels"}
+        {platform === "tiktok" && "AI Prompts for TikTok Videos"}
+        {platform === "youtube" && "AI Prompts for YouTube Shorts"}
+      </title>
+
+      <meta
+        name="description"
+        content={`Best AI prompts for ${platform} videos. Create viral cinematic content using AI prompt generator.`}
+      />
+    </Helmet>
+
+  
+    <h1 style={{ display: "none" }}>
+      {platform === "instagram" && "AI Prompts for Instagram Reels"}
+      {platform === "tiktok" && "AI Prompts for TikTok Videos"}
+      {platform === "youtube" && "AI Prompts for YouTube Shorts"}
+    </h1>
+
+    
+    <p style={{ display: "none" }}>
+      AI prompts for Instagram reels, TikTok videos, and YouTube shorts.
+      Generate cinematic, viral and engaging content using AI tools.
+    </p>
+
+   
+    <div style={{ display: "none" }}>
+      <a href="/instagram">AI Prompts for Instagram</a>
+      <a href="/tiktok">AI Prompts for TikTok</a>
+      <a href="/youtube">AI Prompts for YouTube</a>
+    </div>
+      
       <Header />
 
       {/* iOS hint */}
